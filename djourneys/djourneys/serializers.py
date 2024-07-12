@@ -15,6 +15,10 @@ class ReviewSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'attraction','attraction_id', 'reviewer_name', 'comment', 'reviewer_company',)
 
 class AttractionSerializer(serializers.HyperlinkedModelSerializer):
+    reviews = serializers.HyperlinkedRelatedField(
+        view_name='review_detail',
+        read_only=True
+    )
     reviews = ReviewSerializer(
         many=True,
         read_only=True
